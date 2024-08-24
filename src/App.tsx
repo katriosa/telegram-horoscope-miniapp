@@ -6,6 +6,7 @@ import getHoroscope from "./services/horoscopeService";
 
 const App = () => {
   const [description, setDescription] = useState("");
+  const [selectedSign, setSelectedSign] = useState("");
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -30,25 +31,36 @@ const App = () => {
     };
   }, []);
 
-  const handleBack = useCallback(() => setDescription(""), []);
+  const handleBack = useCallback(() => {
+    setDescription("");
+    setSelectedSign("");
+  }, []);
 
-  const handleLanguageChange = useCallback(() => {
-    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
-  }, [i18n]);
+  const fetchHoroscope = useCallback(
+    async (sign: string) => {
+      const data = await getHoroscope(
+        sign,
+        i18n.language === "ru" ? "original" : "translated"
+      );
+      setDescription(data.horoscope);
+    },
+    [i18n.language]
+  );
 
   const handleSelectSign = useCallback(
     (sign: string) => {
-      const fetchHoroscope = async () => {
-        const data = await getHoroscope(
-          sign,
-          i18n.language === "ru" ? "original" : "translated"
-        );
-        setDescription(data.horoscope);
-      };
-      fetchHoroscope();
+      setSelectedSign(sign);
+      fetchHoroscope(sign);
     },
-    [i18n]
+    [fetchHoroscope]
   );
+
+  const handleLanguageChange = useCallback(() => {
+    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
+    if (selectedSign) {
+      fetchHoroscope(selectedSign);
+    }
+  }, [i18n.language, selectedSign, fetchHoroscope]);
 
   return (
     <div className="app">

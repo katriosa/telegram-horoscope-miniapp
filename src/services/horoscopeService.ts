@@ -27,7 +27,6 @@ const getHoroscope = async (
     "https://poker247tech.ru/get_horoscope/",
     payload
   );
-  console.log("data", response.data);
   return response.data;
 };
 
