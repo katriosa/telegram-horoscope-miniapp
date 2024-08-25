@@ -43,8 +43,11 @@ button:hover {
 }
 
 .switch-button-container {
+  display: flex;
   align-self: flex-end;
   margin: 10px;
+  gap: 30px;
+  align-items: center;
 }
 
 .zodiac-list {

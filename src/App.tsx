@@ -62,13 +62,18 @@ const App = () => {
     }
   }, [i18n.language, selectedSign, fetchHoroscope]);
 
+  const userLang = window.Telegram.WebApp.initDataUnsafe?.user?.language_code;
+
   return (
     <div className="app">
       <div className="switch-button-container">
+        {userLang && <div>User lang: {userLang}</div>}
+
         <button onClick={handleLanguageChange}>
           {i18n.language === "ru" ? "EN" : "RU"}
         </button>
       </div>
+
       {description ? (
         <ZodiacDetail description={description} onBack={handleBack} />
       ) : (
