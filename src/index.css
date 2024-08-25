@@ -88,6 +88,15 @@ button:hover {
   margin-bottom: 40px;
 }
 
+@media (hover: none) {
+  button:hover {
+    border-color: transparent;
+  }
+  .zodiac-item:hover {
+    border-color: white;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   h2 {
     font-size: max(1em, 0.5em + 2cqi);
