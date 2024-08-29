@@ -124,6 +124,15 @@ button:hover {
   }
 }
 
+@media (max-width: 442px) {
+  .zodiac-list {
+    height: auto;
+  }
+  .zodiac-item {
+    height: 100px;
+  }
+}
+
 @media (max-width: 425px) {
   .zodiac-detail {
     margin: 20px;
